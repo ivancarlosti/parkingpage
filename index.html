@@ -9,6 +9,19 @@
             var domain = window.location.hostname;
             document.title = domain;  // Set the domain as the title of the page
             document.getElementById("domain-name").innerText = domain;  // Update the h1 element with the domain name
+
+            var userLang = navigator.language || navigator.userLanguage;
+            var textElement = document.getElementById("construction-text");
+
+            if (userLang.startsWith("pt")) {
+                textElement.innerText = "Este website está em construção.";
+            } else if (userLang.startsWith("en")) {
+                textElement.innerText = "This website is under construction.";
+            } else if (userLang.startsWith("es")) {
+                textElement.innerText = "Este sitio web está en construcción.";
+            } else {
+                textElement.innerText = "This website is under construction.";  // Default to English
+            }
         };
     </script>
     <style>
@@ -46,11 +59,7 @@
         background-color: #ffe800;
         background: repeating-linear-gradient(45deg, #ffe800, #ffe800 0.5rem, #222 0.5rem, #222 1.0rem);
         display: block;
-        height: 0.5rem;
-        margin-top: 1rem;
-      }
-      img {
-        max-width: 100%;
+       -width: 100%;
         height: auto;
       }
       p {
@@ -61,7 +70,7 @@
   <body>
     <main>
       <h1 id="domain-name">Enable javascript to see updated text</h1>
-      <p>Este website está em construção.</p>
+      <p id="construction-text">Este website está em construção.</p>
     </main>
   </body>
 </html>
