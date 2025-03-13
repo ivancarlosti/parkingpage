@@ -15,16 +15,13 @@
         var additionalText = document.createElement("p");
     
         if (userLang.startsWith("pt")) {
-            textElement.innerText = "Este site está indisponível.";
+            textElement.innerText = "Este site está indisponível ou em construção.";
             additionalText.innerHTML = "Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
-        } else if (userLang.startsWith("en")) {
-            textElement.innerText = "This website is unavailable.";
-            additionalText.innerHTML = "If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
         } else if (userLang.startsWith("es")) {
-            textElement.innerText = "Este sitio web no está disponible.";
+            textElement.innerText = "Este sitio web no está disponible o está en construcción.";
             additionalText.innerHTML = "Si esperaba otro contenido, por favor, registre un ticket <a href='https://suporte.ivancarlos.com.br/hc/es-mx/requests/new'>aquí</a>.";
         } else {
-            textElement.innerText = "This website is unavailable.";
+            textElement.innerText = "This website is unavailable or under construction.";
             additionalText.innerHTML = "If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
         }
     
