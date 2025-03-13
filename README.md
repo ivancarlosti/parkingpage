@@ -21,7 +21,8 @@ You can also run it on docker compose adding it to your container:
     container_name: yourproject-gitcloner
     volumes:
       - ./www:/www
+      - ./update.sh:/www/update.sh
     working_dir: /www
-    entrypoint: /bin/sh -c "if [ -d .git ]; then git pull; else git clone --recurse-submodules -j8 https://github.com/ivancarlosti/parkingpage.git .; fi"
+    entrypoint: /bin/sh /www/update.sh
     restart: on-failure
 ```
