@@ -22,6 +22,6 @@ You can also run it on docker compose adding it to your container, do not forget
     volumes:
       - ./www:/www
     working_dir: /www
-    entrypoint: /bin/sh -c "while true; do if [ -d .git ]; then git pull; else git clone --recurse-submodules -j8 https://github.com/ivancarlosti/parkingpage.git .; fi; sleep 1800; done"
+    entrypoint: /bin/sh -c "while true; do if [ -d .git ]; then git pull; else git clone --recurse-submodules -j8 https://github.com/ivancarlosti/parkingpage.git .; fi; sleep 600; done"
     restart: unless-stopped
 ```
