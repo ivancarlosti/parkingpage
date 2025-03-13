@@ -33,6 +33,9 @@
             html,
             body {
                 height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
             }
             body {
                 background-color: #fff;
@@ -41,13 +44,13 @@
                 font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
                 font-size: 1rem;
                 line-height: 1.5;
-                margin: 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
             main {
-                min-width: 25rem;
+                width: 100%;
+                max-width: 20rem;
                 padding: 1rem;
                 text-align: center;
             }
@@ -61,6 +64,10 @@
                 h1 {
                     font-size: 1.5rem;
                 }
+                svg {
+                    width: 100%;
+                    height: auto;
+                }
             }
             h1::after {
                 content: "";
@@ -73,13 +80,13 @@
     <body>
         <main>
             <h1 id="domain-name">example.com</h1>
-            <svg version="1.1" style="max-width: 817px;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 818 240" style="enable-background: new 0 0 818 240;" xml:space="preserve">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 818 240" style="max-width: 100%; height: auto;">
                 <style type="text/css">
                     .st0 {
                         fill: #dddddd;
                     }
                 </style>
-                <g>
+               <g>
                     <path
                         class="st0"
                         d="M530.8,50.7l31.7,0.1c6.7-0.1,12.1-5.6,12.1-12.3c0-6.8-5.5-12.3-12.3-12.3c-0.5,0-1,0-1.5,0.1
