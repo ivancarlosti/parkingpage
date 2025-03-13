@@ -4,32 +4,33 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>example.com</title>
-      <script type="text/javascript">
-         window.onload = function() {
-             var domain = window.location.hostname;
-             document.title = domain;
-             document.getElementById("domain-name").innerText = domain;
-         
-             var userLang = navigator.language || navigator.userLanguage;
-             var textElement = document.getElementById("construction-text");
-         
-             if (userLang.startsWith("pt")) {
-                 textElement.innerText = "Este site está indisponível. Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
-             } else if (userLang.startsWith("pt-br")) {
-                 textElement.innerText = "Este site está indisponível. Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
-             } else if (userLang.startsWith("en")) {
-                 textElement.innerText = "This website is unavailable. If you were expecting other content here, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
-             } else if (userLang.startsWith("en-us")) {
-                 textElement.innerText = "This website is unavailable. If you were expecting other content here, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
-             } else if (userLang.startsWith("es")) {
-                 textElement.innerText = "Este sitio web no está disponible. Si esperabas otro contenido aquí, por favor, registra un ticket <a href='https://suporte.ivancarlos.com.br/hc/es-mx/requests/new'>aquí</a>.";
-             } else if (userLang.startsWith("es-es")) {
-                 textElement.innerText = "Este sitio web no está disponible. Si esperabas otro contenido aquí, por favor, registra un ticket <a href='https://suporte.ivancarlos.com.br/hc/es-mx/requests/new'>aquí</a>.";
-             } else {
-                 textElement.innerText = "This website is unavailable.";
-             }
-         };
-      </script>
+<script type="text/javascript">
+    window.onload = function() {
+        var domain = window.location.hostname;
+        document.title = domain;
+        document.getElementById("domain-name").innerText = domain;
+    
+        var userLang = navigator.language || navigator.userLanguage;
+        var textElement = document.getElementById("construction-text");
+        var additionalText = document.createElement("p");
+    
+        if (userLang.startsWith("pt")) {
+            textElement.innerText = "Este site está indisponível.";
+            additionalText.innerHTML = "Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
+        } else if (userLang.startsWith("en")) {
+            textElement.innerText = "This website is unavailable.";
+            additionalText.innerHTML = "If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
+        } else if (userLang.startsWith("es")) {
+            textElement.innerText = "Este sitio web no está disponible.";
+            additionalText.innerHTML = "Si esperaba otro contenido, por favor, registre un ticket <a href='https://suporte.ivancarlos.com.br/hc/es/requests/new'>aquí</a>.";
+        } else {
+            textElement.innerText = "This website is unavailable.";
+            additionalText.innerHTML = "If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
+        }
+    
+        textElement.appendChild(additionalText);
+    };
+</script>
       <style>
          html, body {
          height: 100%;
