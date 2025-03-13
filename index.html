@@ -4,30 +4,30 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>example.com</title>
-<script type="text/javascript">
-    window.onload = function() {
-        var domain = window.location.hostname;
-        document.title = domain;
-        document.getElementById("domain-name").innerText = domain;
-    
-        var userLang = navigator.language || navigator.userLanguage;
-        var textElement = document.getElementById("construction-text");
-        var additionalText = document.createElement("p");
-    
-        if (userLang.startsWith("pt")) {
-            textElement.innerText = "Este site está indisponível ou em construção.";
-            additionalText.innerHTML = "Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
-        } else if (userLang.startsWith("es")) {
-            textElement.innerText = "Este sitio web no está disponible o está en construcción.";
-            additionalText.innerHTML = "Si esperaba otro contenido, por favor, registre un ticket <a href='https://suporte.ivancarlos.com.br/hc/es-mx/requests/new'>aquí</a>.";
-        } else {
-            textElement.innerText = "This website is unavailable or under construction.";
-            additionalText.innerHTML = "If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
-        }
-    
-        textElement.appendChild(additionalText);
-    };
-</script>
+      <script type="text/javascript">
+         window.onload = function() {
+             var domain = window.location.hostname;
+             document.title = domain;
+             document.getElementById("domain-name").innerText = domain;
+         
+             var userLang = navigator.language || navigator.userLanguage;
+             var textElement = document.getElementById("construction-text");
+             var additionalText = document.createElement("div");
+         
+             if (userLang.startsWith("pt")) {
+                 textElement.innerText = "Este site está indisponível ou em construção.";
+                 additionalText.innerHTML = "Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
+             } else if (userLang.startsWith("es")) {
+                 textElement.innerText = "Este sitio web no está disponible o está en construcción.";
+                 additionalText.innerHTML = "Si esperaba otro contenido, por favor, registre un ticket <a href='https://suporte.ivancarlos.com.br/hc/es-mx/requests/new'>aquí</a>.";
+             } else {
+                 textElement.innerText = "This website is unavailable or under construction.";
+                 additionalText.innerHTML = "If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
+             }
+         
+             textElement.parentNode.insertBefore(additionalText, textElement.nextSibling);
+         };
+      </script>
       <style>
          html, body {
          height: 100%;
@@ -63,21 +63,14 @@
          content: "";
          display: block;
          height: 0.5rem;
-         margin-top: 1rem;
-         }
-         img {
-         max-width: 100%;
-         height: auto;
-         }
-         p {
-         margin: 1rem 0 0 0;
+         margin-top: 0 0;
          }
       </style>
    </head>
    <body>
       <main>
          <h1 id="domain-name">example.com</h1>
-         <svg version="1.1" style="max-width:817px" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+		          <svg version="1.1" style="max-width:817px" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
             viewBox="0 0 818 240" style="enable-background:new 0 0 818 240;" xml:space="preserve">
             <style type="text/css">
                .st0 {
@@ -300,7 +293,7 @@
                   M220.7,226.4H207v-10.3L220.7,226.4z"/>
             </g>
          </svg>
-         <p id="construction-text">This website is unavailable.</p>
+         <div id="construction-text">This website is unavailable.</div>
       </main>
    </body>
 </html>
