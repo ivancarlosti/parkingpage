@@ -2,7 +2,7 @@
 
 Dynamic HTML to put on parking domains
 
-You can also run it on docker compose adding it to your container:
+You can also run it on docker compose adding it to your container, do not forget to manage ports and certificates when needed:
 
 ```
   nginx:
@@ -11,7 +11,7 @@ You can also run it on docker compose adding it to your container:
     volumes:
       - ./www:/usr/share/nginx/html
     ports:
-      - "10000:80"
+      - "80:80"
     restart: unless-stopped
     depends_on:
       - git
