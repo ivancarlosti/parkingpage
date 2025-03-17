@@ -75,6 +75,7 @@ function getCpuUsage() {
 
 // Gather data
 $data = array(
+    "php_version" => phpversion(),
     "disk_usage" => getDiskUsage(),
     "memory_usage" => getMemoryUsage(),
     "cpu_usage" => getCpuUsage()
