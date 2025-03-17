@@ -3,6 +3,21 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Get the current URL
+$currentUrl = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+// Remove the 'pass' query parameter from the URL
+$currentUrlWithoutPass = preg_replace('/\?pass=.*$/', '', $currentUrl);
+
+// Calculate the MD5 hash of the current URL
+$expectedHash = md5($currentUrlWithoutPass);
+
+// Check if the 'pass' query parameter is set and matches the expected hash
+if (!isset($_GET['pass']) || $_GET['pass'] !== $expectedHash) {
+    header('HTTP/1.1 403 Forbidden');
+    echo json_encode(array("error" => "Forbidden: Invalid hash"));
+    exit;
+}
+
 // Function to get disk usage in percent for all useful mounted filesystems
 function getDiskUsage() {
     $mounts = file('/proc/mounts');
