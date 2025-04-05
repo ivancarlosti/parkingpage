@@ -8,8 +8,6 @@ Dynamic HTML to put on parking domains
 [![License](https://img.shields.io/github/license/ivancarlosti/parkingpage?label=License)](LICENSE)
 [![Security](https://img.shields.io/badge/Security-View%20Here-purple)](https://github.com/ivancarlosti/parkingpage/security)
 [![Code of Conduct](https://img.shields.io/badge/Code%20of%20Conduct-1.4-4baaaa)](https://github.com/ivancarlosti/parkingpage/tree/main?tab=coc-ov-file)  
-[![sync-qifi-content](https://github.com/ivancarlosti/parkingpage/actions/workflows/sync-qifi-content.yml/badge.svg)](https://github.com/ivancarlosti/parkingpage/actions/workflows/sync-qifi-content.yml)  
-[![pages-build-deployment](https://github.com/ivancarlosti/parkingpage/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ivancarlosti/parkingpage/actions/workflows/pages/pages-build-deployment)
 
 ## Details
 You can also run it on docker compose adding it to your container, do not forget to manage ports and certificates using a reverse proxy or improving nginx service:
