@@ -10,10 +10,13 @@
                 var domain = window.location.hostname;
                 document.title = domain;
                 document.getElementById("domain-name").innerText = domain;
-
+        
+                // Call adjustHeadingFontSize after updating the domain name
+                adjustHeadingFontSize();
+        
                 var userLang = navigator.language || navigator.userLanguage;
                 var textElement = document.getElementById("construction-text");
-
+        
                 if (userLang.startsWith("pt")) {
                     textElement.innerHTML = "Este site está indisponível ou em construção. Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
                 } else if (userLang.startsWith("es")) {
@@ -22,26 +25,25 @@
                     textElement.innerHTML = "This website is unavailable or under construction. If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
                 }
             };
-
+        
             function adjustHeadingFontSize() {
                 const mainElement = document.querySelector('main');
                 const headingElement = document.querySelector('h1');
-
+        
                 if (mainElement && headingElement) {
                     const mainWidth = mainElement.offsetWidth;
                     const baseFontSize = 2.5; // Initial font size in rem
                     const maxWidth = 320; // Example: Width at which baseFontSize is targeted
                     const minFontSize = 1.5; // Minimum font size in rem
-
-                    // Calculate a scaling factor based on the container width
+        
                     let fontSize = baseFontSize * (mainWidth / maxWidth);
-
-                    // Ensure the font size stays within reasonable bounds
                     fontSize = Math.max(minFontSize, Math.min(baseFontSize, fontSize));
-
+        
                     headingElement.style.fontSize = `${fontSize}rem`;
                 }
             }
+        
+            // Call the function on initial load and window resize
             document.addEventListener('DOMContentLoaded', adjustHeadingFontSize);
             window.addEventListener('resize', adjustHeadingFontSize);
         </script>
