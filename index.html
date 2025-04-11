@@ -6,21 +6,19 @@
         <title>Domain Parking</title>
         <meta name="author" content="Ivan Carlos">
         <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
+            window.onload = function () {
                 var domain = window.location.hostname;
                 document.title = domain;
-            
+        
                 var userLang = navigator.language || navigator.userLanguage;
-                console.log("Detected language:", userLang);  // For debugging
-                
                 var headerElement = document.getElementById("maintenance-mode");
                 var textElement = document.getElementById("construction-text");
-                
+        
                 if (!headerElement || !textElement) {
-                    console.error("Could not find one or both elements");
+                    console.error("Elements with IDs 'maintenance-mode' or 'construction-text' not found.");
                     return;
                 }
-            
+        
                 if (userLang.startsWith("pt")) {
                     headerElement.innerHTML = "Modo de Manutenção";
                     textElement.innerHTML = "Este site está indisponível ou em construção. Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
@@ -31,7 +29,7 @@
                     headerElement.innerHTML = "Maintenance Mode";
                     textElement.innerHTML = "This website is unavailable or under construction. If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
                 }
-            });
+            };
         </script>
         <style>
             html,
