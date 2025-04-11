@@ -9,21 +9,29 @@
             window.onload = function () {
                 var domain = window.location.hostname;
                 document.title = domain;
-                document.getElementById("domain-name").innerText = domain;
+                var domainNameElement = document.getElementById("domain-name");
+                domainNameElement.innerText = domain;
         
-                // Call adjustHeadingFontSize after updating the domain name
+                // Call adjustHeadingFontSize after setting the initial domain name
                 adjustHeadingFontSize();
         
                 var userLang = navigator.language || navigator.userLanguage;
                 var textElement = document.getElementById("construction-text");
+                var newDomainText = "This is a much longer example domain name that will likely take up more space."; // Example longer text
         
                 if (userLang.startsWith("pt")) {
                     textElement.innerHTML = "Este site está indisponível ou em construção. Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
+                    domainNameElement.innerText = "Um domínio de exemplo muito mais longo em português para teste.";
                 } else if (userLang.startsWith("es")) {
                     textElement.innerHTML = "Este sitio web no está disponible o está en construcción. Si esperaba otro contenido, por favor, registre un ticket <a href='https://suporte.ivancarlos.com.br/hc/es-mx/requests/new'>aquí</a>.";
+                    domainNameElement.innerText = "Un dominio de ejemplo mucho más largo en español para probar.";
                 } else {
                     textElement.innerHTML = "This website is unavailable or under construction. If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
+                    domainNameElement.innerText = newDomainText; // Set the longer text
                 }
+        
+                // Call adjustHeadingFontSize again after updating the domain name with potentially longer text
+                adjustHeadingFontSize();
             };
         
             function adjustHeadingFontSize() {
