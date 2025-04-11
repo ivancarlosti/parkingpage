@@ -9,51 +9,21 @@
             window.onload = function () {
                 var domain = window.location.hostname;
                 document.title = domain;
-                var domainNameElement = document.getElementById("domain-name");
-                domainNameElement.innerText = domain;
-        
-                // Call adjustHeadingFontSize after setting the initial domain name
-                adjustHeadingFontSize();
-        
+                document.getElementById("domain-name").innerText = domain;
+
                 var userLang = navigator.language || navigator.userLanguage;
                 var textElement = document.getElementById("construction-text");
-                var newDomainText = "This is a much longer example domain name that will likely take up more space."; // Example longer text
-        
+
                 if (userLang.startsWith("pt")) {
                     textElement.innerHTML = "Este site está indisponível ou em construção. Se você esperava outro conteúdo, por favor, registre um ticket <a href='https://suporte.ivancarlos.com.br/hc/pt-br/requests/new'>aqui</a>.";
-                    domainNameElement.innerText = "Um domínio de exemplo muito mais longo em português para teste.";
                 } else if (userLang.startsWith("es")) {
                     textElement.innerHTML = "Este sitio web no está disponible o está en construcción. Si esperaba otro contenido, por favor, registre un ticket <a href='https://suporte.ivancarlos.com.br/hc/es-mx/requests/new'>aquí</a>.";
-                    domainNameElement.innerText = "Un dominio de ejemplo mucho más largo en español para probar.";
                 } else {
                     textElement.innerHTML = "This website is unavailable or under construction. If you expected different content, please submit a ticket <a href='https://suporte.ivancarlos.com.br/hc/en-us/requests/new'>here</a>.";
-                    domainNameElement.innerText = newDomainText; // Set the longer text
                 }
-        
-                // Call adjustHeadingFontSize again after updating the domain name with potentially longer text
-                adjustHeadingFontSize();
+
+                textElement.parentNode.insertBefore(additionalText, textElement.nextSibling);
             };
-        
-            function adjustHeadingFontSize() {
-                const mainElement = document.querySelector('main');
-                const headingElement = document.querySelector('h1');
-        
-                if (mainElement && headingElement) {
-                    const mainWidth = mainElement.offsetWidth;
-                    const baseFontSize = 2.5; // Initial font size in rem
-                    const maxWidth = 320; // Example: Width at which baseFontSize is targeted
-                    const minFontSize = 1.5; // Minimum font size in rem
-        
-                    let fontSize = baseFontSize * (mainWidth / maxWidth);
-                    fontSize = Math.max(minFontSize, Math.min(baseFontSize, fontSize));
-        
-                    headingElement.style.fontSize = `${fontSize}rem`;
-                }
-            }
-        
-            // Call the function on initial load and window resize
-            document.addEventListener('DOMContentLoaded', adjustHeadingFontSize);
-            window.addEventListener('resize', adjustHeadingFontSize);
         </script>
         <style>
             html,
@@ -81,9 +51,19 @@
                 text-align: center;
             }
             h1 {
+                font-size: 2.5rem;
                 line-height: 1.1;
                 margin: 0;
-                padding: 0rem;
+                padding: 1rem;
+            }
+            @media screen and (max-width: 480px) {
+                h1 {
+                    font-size: 1.5rem;
+                }
+                svg {
+                    width: 100%;
+                    height: auto;
+                }
             }
             h1::after {
                 content: "";
@@ -91,17 +71,11 @@
                 height: 0.5rem;
                 margin-top: 0 0;
             }
-            @media screen and (max-width: 480px) {
-                svg {
-                    width: 100%;
-                    height: auto;
-                }
-            }
         </style>
     </head>
     <body>
         <main>
-            <h1 id="domain-name">example.com</h1>
+            <h1 id="domain-name">Parking</h1>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 818 240" style="max-width: 100%; height: auto;">
                 <style type="text/css">
                     .st0 {
