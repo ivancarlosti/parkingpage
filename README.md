@@ -1,6 +1,7 @@
 # Parking Page
 Dynamic HTML to put on parking domains
 
+<!-- buttons -->
 [![Stars](https://img.shields.io/github/stars/ivancarlosti/parkingpage?label=⭐%20Stars&color=gold&style=flat)](https://github.com/ivancarlosti/parkingpage/stargazers)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ivancarlosti/parkingpage?label=Last%20Commit)](https://github.com/ivancarlosti/parkingpage/commits)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ivancarlosti/parkingpage?label=Activity)](https://github.com/ivancarlosti/parkingpage/pulse)
@@ -8,6 +9,7 @@ Dynamic HTML to put on parking domains
 [![License](https://img.shields.io/github/license/ivancarlosti/parkingpage?label=License)](LICENSE)
 [![Security](https://img.shields.io/badge/Security-View%20Here-purple)](https://github.com/ivancarlosti/parkingpage/security)
 [![Code of Conduct](https://img.shields.io/badge/Code%20of%20Conduct-1.4-4baaaa)](https://github.com/ivancarlosti/parkingpage/tree/main?tab=coc-ov-file)  
+<!-- endbuttons -->
 
 ## Details
 You can also run it on docker compose adding it to your container, do not forget to manage ports and certificates using a reverse proxy or improving nginx service:
@@ -37,6 +39,7 @@ services:
       - git
 ```
 
+<!-- footer -->
 ---
 
 ## 🧑‍💻 Consulting and technical support
