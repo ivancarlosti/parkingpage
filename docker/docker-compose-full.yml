@@ -1,20 +1,15 @@
-name: ddnsonroute53
+name: parkingpage
 
 services:
   ddnsonroute53:
-    image: ghcr.io/ivancarlosti/ddnsonroute53:latest
+    image: ghcr.io/ivancarlosti/parkingpage:latest
     env_file: .env
-    container_name: ddnsonroute53
+    container_name: parkingpage
     restart: unless-stopped
 # BEGIN remove comment for testing using custom PHP
 #    volumes:
 #      - ./www:/var/www/html
 # END remove comment for testing using custom PHP
-    environment:
-      - DB_SERVER=${DB_SERVER}
-      - DB_NAME=${DB_NAME}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.php.rule=Host(`subdomain.example.com`)"   ### CHANGE subdomain.example.com TO YOUR DOMAIN ###
@@ -26,30 +21,9 @@ services:
     networks:
       - web
 
-  db:
-    image: mariadb:latest
-    env_file: .env
-    container_name: ddnsonroute53-db
-    environment:
-      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-      - MARIADB_DATABASE=${DB_NAME}
-      - MARIADB_USER=${DB_USERNAME}
-      - MARIADB_PASSWORD=${DB_PASSWORD}
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - web
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "mariadb-admin", "ping", "--host=localhost", "--user=root", "--password=$DB_ROOT_PASSWORD"]
-      interval: 5s
-      timeout: 5s
-      retries: 15
-      start_period: 30s
-
   traefik:
     image: traefik:latest
-    container_name: ddnsonroute53-traefik
+    container_name: parkingpage-traefik
     ports:
       - "80:80"
       - "443:443"
