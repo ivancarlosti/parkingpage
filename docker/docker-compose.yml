@@ -10,6 +10,7 @@ services:
 #    volumes:
 #      - ./www:/var/www/html
 # END remove comment for testing using custom PHP
+    entrypoint: ["/startup.sh"]
     ports:
       - "5666:80"  # expose port 5666 to host
     extra_hosts:
