@@ -172,9 +172,12 @@ generate_security_txt
 
 echo "Replacement done."
 
-# Remove this script from the container for security/cleanup
-rm -f /startup.sh
+# Schedule deletion of startup script in background after exit
+(
+  sleep 10
+  rm -f /startup.sh
+) &
 
-echo "Startup script removed, starting nginx..."
+echo "Starting nginx..."
 
 exec nginx -g 'daemon off;'
