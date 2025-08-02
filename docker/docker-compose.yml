@@ -12,7 +12,7 @@ services:
 # END remove comment for testing using custom PHP
     entrypoint: ["/startup.sh"]
     ports:
-      - "10001:80"  # expose port 5666 to host
+      - "10001:80"  # expose port 10001 to host
     extra_hosts:
       - host.docker.internal:host-gateway
     deploy:
