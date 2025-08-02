@@ -1,13 +1,18 @@
 <?php
 // Read environment variables or set default values
 $logoUrl = getenv('LOGO_URL') ?: 'logo.png';
-$title = getenv('TITLE') ?: 'Landing Page';
-$subtext = getenv('SUBTEXT') ?: '- em construção -';
-$email = getenv('EMAIL') ?: 'email@example.com';
-$phone = getenv('PHONE') ?: '+55 11 98765-4321';
-$whatsappLink = getenv('WHATSAPP_LINK') ?: 'https://wa.me/5511987654321';
+$title = getenv('TITLE') ?: 'Gabriel Rosa Arquitetura';
+$subtext = getenv('SUBTEXT') ?: 'Arquitetura e Interiores';
+$email = getenv('EMAIL') ?: 'gabriel@gabrielrosarq.com.br';
+$phone = getenv('PHONE') ?: '+55 11 95061-6188';
+$whatsappLink = getenv('WHATSAPP_LINK') ?: 'https://wa.me/5511950616188';
 $creditLogoUrl = getenv('CREDIT_LOGO_URL') ?: 'https://s3.sa-east-1.amazonaws.com/envio.icc.gg/seeig5j8jnoc.png';
 $creditLink = getenv('CREDIT_LINK') ?: 'https://ivancarlos.com.br/';
+
+$faviconPng = getenv('FAVICON_PNG_URL') ?: '/favicon-96x96.png';
+$faviconSvg = getenv('FAVICON_SVG_URL') ?: '/favicon.svg';
+$faviconIco = getenv('FAVICON_ICO_URL') ?: '/favicon.ico';
+$appleTouchIcon = getenv('APPLE_TOUCH_ICON_URL') ?: '/apple-touch-icon.png';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,10 +20,10 @@ $creditLink = getenv('CREDIT_LINK') ?: 'https://ivancarlos.com.br/';
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title><?= htmlspecialchars($title) ?></title>
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" href="<?= htmlspecialchars($faviconPng) ?>" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="<?= htmlspecialchars($faviconSvg) ?>" />
+<link rel="shortcut icon" href="<?= htmlspecialchars($faviconIco) ?>" />
+<link rel="apple-touch-icon" sizes="180x180" href="<?= htmlspecialchars($appleTouchIcon) ?>" />
 <meta name="apple-mobile-web-app-title" content="<?= htmlspecialchars($title) ?>" />
 <style>
 body {
@@ -104,7 +109,7 @@ p {
 <body>
 <div class="container">
   <div class="logo"></div>
-  <!-- Uncomment below line to display title -->
+  <!-- Uncomment the line below to show the title text -->
   <!-- <h1><?= htmlspecialchars($title) ?></h1> -->
   <p><?= htmlspecialchars($subtext) ?></p>
   <div class="contact">
