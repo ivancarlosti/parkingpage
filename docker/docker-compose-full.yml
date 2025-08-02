@@ -1,7 +1,7 @@
 name: parkingpage
 
 services:
-  ddnsonroute53:
+  parkingpage:
     image: ghcr.io/ivancarlosti/parkingpage:latest
     env_file: .env
     container_name: parkingpage
