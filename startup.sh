@@ -19,7 +19,6 @@ remove_block() {
   sed -i "/<!-- ${block_name}_BLOCK_START -->/,/<!-- ${block_name}_BLOCK_END -->/d" "$HTML_FILE"
 }
 
-# Helper function to check if string is equal to true (case-insensitive)
 is_true() {
   case "$(echo "$1" | tr '[:upper:]' '[:lower:]')" in
     true) return 0 ;;
@@ -27,10 +26,10 @@ is_true() {
   esac
 }
 
-# Load env variables or empty string
+# Load environment variables or defaults
 LOGO_URL="${LOGO_URL:-}"
 TITLE="${TITLE:-Parking Page}"
-SHOW_TITLE="${SHOW_TITLE:-true}"  # default show true
+SHOW_TITLE="${SHOW_TITLE:-true}"
 SUBTEXT="${SUBTEXT:-}"
 
 EMAIL="${EMAIL:-}"
@@ -47,7 +46,8 @@ FAVICON_SVG_URL="${FAVICON_SVG_URL:-/favicon.svg}"
 FAVICON_ICO_URL="${FAVICON_ICO_URL:-/favicon.ico}"
 APPLE_TOUCH_ICON_URL="${APPLE_TOUCH_ICON_URL:-/apple-touch-icon.png}"
 
-# LOGO
+# HTML placeholders replacement and conditional block removal
+
 if [ -z "$LOGO_URL" ]; then
   remove_block "LOGO"
 else
@@ -57,25 +57,22 @@ fi
 # Always replace <title> and apple-mobile-web-app-title meta content
 replace_placeholder "TITLE" "$TITLE"
 
-# Conditionally replace or remove visible title <h1>{{TITLE}}</h1> block below logo
+# Conditionally show or hide <h1>{{TITLE}}</h1> below the logo
 if is_true "$SHOW_TITLE" && [ -n "$TITLE" ]; then
   replace_placeholder "TITLE" "$TITLE"
 else
   remove_block "TITLE"
 fi
 
-# SUBTEXT
 if [ -z "$SUBTEXT" ]; then
   remove_block "SUBTEXT"
 else
   replace_placeholder "SUBTEXT" "$SUBTEXT"
 fi
 
-# EMAIL block
 if [ -z "$EMAIL" ]; then
   remove_block "EMAIL"
 else
-  # Fallback mailto link if LINK_EMAIL not set
   if [ -z "$LINK_EMAIL" ]; then
     LINK_EMAIL="mailto:$EMAIL"
   fi
@@ -83,7 +80,6 @@ else
   replace_placeholder "LINK_EMAIL" "$LINK_EMAIL"
 fi
 
-# PHONE and LINK_PHONE block
 if [ -z "$PHONE" ] || [ -z "$LINK_PHONE" ]; then
   remove_block "PHONE"
 else
@@ -91,15 +87,83 @@ else
   replace_placeholder "LINK_PHONE" "$LINK_PHONE"
 fi
 
-# CREDIT
 replace_placeholder "CREDIT_LOGO_URL" "$CREDIT_LOGO_URL"
 replace_placeholder "CREDIT_LINK" "$CREDIT_LINK"
 
-# FAVICONS
 replace_placeholder "FAVICON_PNG_URL" "$FAVICON_PNG_URL"
 replace_placeholder "FAVICON_SVG_URL" "$FAVICON_SVG_URL"
 replace_placeholder "FAVICON_ICO_URL" "$FAVICON_ICO_URL"
 replace_placeholder "APPLE_TOUCH_ICON_URL" "$APPLE_TOUCH_ICON_URL"
+
+# -----------------------------------------
+# security.txt generation from template below
+# -----------------------------------------
+
+generate_security_txt() {
+  TEMPLATE_FILE="/usr/share/nginx/html/.well-known/security.txt.template"
+  OUTPUT_FILE="/usr/share/nginx/html/.well-known/security.txt"
+
+  CONTACT_LINK1="${CONTACT_LINK1:-}"
+  CONTACT_LINK2="${CONTACT_LINK2:-}"
+  CONTACT_LINK3="${CONTACT_LINK3:-}"
+  LANG="${LANG:-}"
+  POLICY="${POLICY:-}"
+  EXPIREDATE_ISO="${EXPIREDATE_ISO:-}"
+
+  # Required: at least one contact and the expire date
+  if [ -z "$EXPIREDATE_ISO" ]; then
+    echo "EXPIREDATE_ISO not set. Skipping security.txt generation."
+    return
+  fi
+
+  if [ -z "$CONTACT_LINK1" ] && [ -z "$CONTACT_LINK2" ] && [ -z "$CONTACT_LINK3" ]; then
+    echo "No CONTACT_LINK variables set. Skipping security.txt generation."
+    return
+  fi
+
+  if [ ! -f "$TEMPLATE_FILE" ]; then
+    echo "Template file $TEMPLATE_FILE not found. Skipping security.txt generation."
+    return
+  fi
+
+  cp "$TEMPLATE_FILE" "$OUTPUT_FILE"
+
+  replace_in_file() {
+    local placeholder=$1
+    local value=$2
+    local file=$3
+    local escaped
+    escaped=$(printf '%s\n' "$value" | sed -e 's/[\/&]/\\&/g')
+    sed -i "s|{{${placeholder}}}|${escaped}|g" "$file"
+  }
+
+  for i in 1 2 3; do
+    val=$(eval echo \${CONTACT_LINK$i})
+    if [ -z "$val" ]; then
+      sed -i "/{{CONTACT_LINK${i}}}/d" "$OUTPUT_FILE"
+    else
+      replace_in_file "CONTACT_LINK${i}" "$val" "$OUTPUT_FILE"
+    fi
+  done
+
+  if [ -z "$LANG" ]; then
+    sed -i "/{{LANG}}/d" "$OUTPUT_FILE"
+  else
+    replace_in_file "LANG" "$LANG" "$OUTPUT_FILE"
+  fi
+
+  if [ -z "$POLICY" ]; then
+    sed -i "/{{POLICY}}/d" "$OUTPUT_FILE"
+  else
+    replace_in_file "POLICY" "$POLICY" "$OUTPUT_FILE"
+  fi
+
+  replace_in_file "EXPIREDATE_ISO" "$EXPIREDATE_ISO" "$OUTPUT_FILE"
+
+  echo "security.txt generated at $OUTPUT_FILE"
+}
+
+generate_security_txt
 
 echo "Replacement done, starting nginx..."
 
