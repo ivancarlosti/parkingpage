@@ -72,11 +72,11 @@ else
 fi
 
 # EMAIL block
-if [ -z "$EMAIL" ] && [ -z "$LINK_EMAIL" ]; then
+if [ -z "$EMAIL" ]; then
   remove_block "EMAIL"
 else
-  # Fallback mailto link if LINK_EMAIL not set but EMAIL present
-  if [ -z "$LINK_EMAIL" ] && [ -n "$EMAIL" ]; then
+  # Fallback mailto link if LINK_EMAIL not set
+  if [ -z "$LINK_EMAIL" ]; then
     LINK_EMAIL="mailto:$EMAIL"
   fi
   replace_placeholder "EMAIL" "$EMAIL"
