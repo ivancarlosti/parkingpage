@@ -3,6 +3,7 @@ FROM nginx:alpine
 # Copy your static website files (HTML, CSS, JS, images, etc.) into Nginx html directory
 FROM nginx:alpine
 COPY index.html /usr/share/nginx/html/
+COPY .well-known /usr/share/nginx/html/.well-known
 COPY startup.sh /startup.sh
 RUN chmod +x /startup.sh
 
