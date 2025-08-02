@@ -46,7 +46,7 @@ FAVICON_SVG_URL="${FAVICON_SVG_URL:-/favicon.svg}"
 FAVICON_ICO_URL="${FAVICON_ICO_URL:-/favicon.ico}"
 APPLE_TOUCH_ICON_URL="${APPLE_TOUCH_ICON_URL:-/apple-touch-icon.png}"
 
-# HTML placeholders replacement and conditional block removal
+# HTML placeholders replacement and conditional blocks
 
 if [ -z "$LOGO_URL" ]; then
   remove_block "LOGO"
@@ -57,7 +57,7 @@ fi
 # Always replace <title> and apple-mobile-web-app-title meta content
 replace_placeholder "TITLE" "$TITLE"
 
-# Conditionally show or hide <h1>{{TITLE}}</h1> below the logo
+# Conditionally show/hide <h1>{{TITLE}}</h1> block
 if is_true "$SHOW_TITLE" && [ -n "$TITLE" ]; then
   replace_placeholder "TITLE" "$TITLE"
 else
@@ -95,9 +95,9 @@ replace_placeholder "FAVICON_SVG_URL" "$FAVICON_SVG_URL"
 replace_placeholder "FAVICON_ICO_URL" "$FAVICON_ICO_URL"
 replace_placeholder "APPLE_TOUCH_ICON_URL" "$APPLE_TOUCH_ICON_URL"
 
-# -----------------------------------------
-# security.txt generation from template below
-# -----------------------------------------
+# -----------------------------
+# Generate security.txt from template
+# -----------------------------
 
 generate_security_txt() {
   TEMPLATE_FILE="/usr/share/nginx/html/.well-known/security.txt.template"
@@ -110,14 +110,16 @@ generate_security_txt() {
   POLICY="${POLICY:-}"
   EXPIREDATE_ISO="${EXPIREDATE_ISO:-}"
 
-  # Required: at least one contact and the expire date
+  # Check required vars
   if [ -z "$EXPIREDATE_ISO" ]; then
     echo "EXPIREDATE_ISO not set. Skipping security.txt generation."
+    rm -f "$TEMPLATE_FILE"
     return
   fi
 
   if [ -z "$CONTACT_LINK1" ] && [ -z "$CONTACT_LINK2" ] && [ -z "$CONTACT_LINK3" ]; then
     echo "No CONTACT_LINK variables set. Skipping security.txt generation."
+    rm -f "$TEMPLATE_FILE"
     return
   fi
 
@@ -161,10 +163,18 @@ generate_security_txt() {
   replace_in_file "EXPIREDATE_ISO" "$EXPIREDATE_ISO" "$OUTPUT_FILE"
 
   echo "security.txt generated at $OUTPUT_FILE"
+
+  # Delete template after processing
+  rm -f "$TEMPLATE_FILE"
 }
 
 generate_security_txt
 
-echo "Replacement done, starting nginx..."
+echo "Replacement done."
+
+# Remove this script from the container for security/cleanup
+rm -f /startup.sh
+
+echo "Startup script removed, starting nginx..."
 
 exec nginx -g 'daemon off;'
