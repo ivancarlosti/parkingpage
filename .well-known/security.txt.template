@@ -1,0 +1,12 @@
+# Based on https://securitytxt.org/
+# All inquiries should be directed to the following communication channels:
+
+Contact: {{CONTACT_LINK1}}
+Contact: {{CONTACT_LINK2}}
+Contact: {{CONTACT_LINK3}}
+
+Preferred-Languages: {{LANG}}
+
+Policy: {{POLICY}}
+
+Expires: {{EXPIREDATE_ISO}}
