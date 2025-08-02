@@ -4,7 +4,7 @@ services:
   parkingpage:
     image: ghcr.io/ivancarlosti/parkingpage:latest
     env_file: .env
-    container_name: ddnsonroute53
+    container_name: parkingpage
     restart: unless-stopped
 # BEGIN remove comment for testing using custom PHP
 #    volumes:
