@@ -54,7 +54,10 @@ else
   replace_placeholder "LOGO_URL" "$LOGO_URL"
 fi
 
-# TITLE block controlled by SHOW_TITLE and presence of TITLE variable
+# Always replace <title> and apple-mobile-web-app-title meta content
+replace_placeholder "TITLE" "$TITLE"
+
+# Conditionally replace or remove visible title <h1>{{TITLE}}</h1> block below logo
 if is_true "$SHOW_TITLE" && [ -n "$TITLE" ]; then
   replace_placeholder "TITLE" "$TITLE"
 else
@@ -72,7 +75,7 @@ fi
 if [ -z "$EMAIL" ] && [ -z "$LINK_EMAIL" ]; then
   remove_block "EMAIL"
 else
-  # If LINK_EMAIL missing, fallback to mailto:EMAIL
+  # Fallback mailto link if LINK_EMAIL not set but EMAIL present
   if [ -z "$LINK_EMAIL" ] && [ -n "$EMAIL" ]; then
     LINK_EMAIL="mailto:$EMAIL"
   fi
