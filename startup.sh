@@ -172,12 +172,6 @@ generate_security_txt
 
 echo "Replacement done."
 
-# Schedule deletion of startup script in background after exit
-(
-  sleep 2
-  rm -f /startup.sh
-) &
-
 echo "Starting nginx..."
 
 exec nginx -g 'daemon off;'
