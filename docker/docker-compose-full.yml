@@ -15,9 +15,6 @@ services:
       - "traefik.http.routers.php.rule=Host(`subdomain.example.com`)"   ### CHANGE subdomain.example.com TO YOUR DOMAIN ###
       - "traefik.http.routers.php.entrypoints=websecure"
       - "traefik.http.routers.php.tls.certresolver=letsencrypt"
-    depends_on:
-      db:
-        condition: service_healthy
     networks:
       - web
 
@@ -44,9 +41,6 @@ services:
     networks:
       - web
     restart: unless-stopped
-
-volumes:
-  db_data:
 
 networks:
   web:
