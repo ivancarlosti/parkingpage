@@ -174,7 +174,7 @@ echo "Replacement done."
 
 # Schedule deletion of startup script in background after exit
 (
-  sleep 10
+  sleep 2
   rm -f /startup.sh
 ) &
 
