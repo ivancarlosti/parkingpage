@@ -1,8 +1,8 @@
-name: ddnsonroute53
+name: parkingpage
 
 services:
-  ddnsonroute53:
-    image: ghcr.io/ivancarlosti/ddnsonroute53:latest
+  parkingpage:
+    image: ghcr.io/ivancarlosti/parkingpage:latest
     env_file: .env
     container_name: ddnsonroute53
     restart: unless-stopped
@@ -12,10 +12,5 @@ services:
 # END remove comment for testing using custom PHP
     ports:
       - "5666:80"  # expose port 5666 to host
-    environment:
-      - DB_SERVER=${DB_SERVER}
-      - DB_NAME=${DB_NAME}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
     extra_hosts:
       - host.docker.internal:host-gateway
