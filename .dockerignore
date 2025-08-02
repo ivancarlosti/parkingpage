@@ -1,0 +1,8 @@
+.git/
+.github/
+docker/
+.dockerignore
+CNAME
+Dockerfile
+README.md
+LICENSE
