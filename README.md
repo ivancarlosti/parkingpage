@@ -1,6 +1,10 @@
 # Parking Page
 Dynamic HTML to put on parking domains
 
+<!-- buttons -->
+
+<!-- endbuttons -->
+
 ## Details
 You can also run it on docker compose adding it to your container, do not forget to manage ports and certificates using a reverse proxy or improving nginx service:
 
