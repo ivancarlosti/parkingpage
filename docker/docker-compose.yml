@@ -1,0 +1,15 @@
+name: parkingpage
+
+services:
+  parkingpage:
+    image: ghcr.io/ivancarlosti/parkingpage:latest
+    env_file: .env
+    container_name: parkingpage
+    restart: unless-stopped
+    entrypoint: ["/startup.sh"]
+    ports:
+      - "${WEB_PORT:-10001:80}" # default port exposted 10001
+    deploy:
+      resources:
+        limits:
+          memory: 128M

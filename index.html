@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{TITLE}}</title>
+
+  <link rel="icon" type="image/png" href="{{FAVICON_PNG_URL}}" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="{{FAVICON_SVG_URL}}" />
+  <link rel="shortcut icon" href="{{FAVICON_ICO_URL}}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{APPLE_TOUCH_ICON_URL}}" />
+  <meta name="apple-mobile-web-app-title" content="{{TITLE}}" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+    .container {
+      max-width: 600px;
+      width: 90%;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .logo {
+      width: 300px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 8px;
+    }
+    h1 {
+      margin: 0.5rem 0;
+      font-size: 2rem;
+      color: #ffffff;
+    }
+    p {
+      margin: 0.5rem 0 1.5rem;
+      color: #bbbbbb;
+      font-size: 1rem;
+    }
+    .contact {
+      font-size: 1.1rem;
+      color: #dddddd;
+    }
+    .contact a {
+      color: #dddddd;
+      text-decoration: none;
+    }
+    .contact a:hover {
+      text-decoration: underline;
+    }
+    .contact span {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .credit-logo {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+    }
+    .credit-logo img {
+      width: 16px;
+      height: 16px;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .credit-logo img:hover {
+      opacity: 1;
+    }
+    @media (max-width: 480px) {
+      .logo {
+        width: 100%;
+        height: 150px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- LOGO_BLOCK_START -->
+    <div class="logo" style="background-image: url('{{LOGO_URL}}');"></div>
+    <!-- LOGO_BLOCK_END -->
+
+    <!-- TITLE_BLOCK_START -->
+    <h1>{{TITLE}}</h1>
+    <!-- TITLE_BLOCK_END -->
+
+    <!-- SUBTEXT_BLOCK_START -->
+    <p>{{SUBTEXT}}</p>
+    <!-- SUBTEXT_BLOCK_END -->
+
+    <div class="contact">
+      <!-- EMAIL_BLOCK_START -->
+      <span>📧 <a href="{{LINK_EMAIL}}">{{EMAIL}}</a></span>
+      <!-- EMAIL_BLOCK_END -->
+
+      <!-- PHONE_BLOCK_START -->
+      <span>📞 <a href="{{LINK_PHONE}}" target="_blank" rel="noopener noreferrer">{{PHONE}}</a></span>
+      <!-- PHONE_BLOCK_END -->
+    </div>
+  </div>
+
+  <a href="{{CREDIT_LINK}}" target="_blank" class="credit-logo" aria-label="Site de Ivan Carlos" rel="noopener noreferrer">
+    <img src="{{CREDIT_LOGO_URL}}" alt="Ivan Carlos Logo" />
+  </a>
+</body>
+</html>
