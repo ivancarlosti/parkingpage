@@ -43,6 +43,35 @@ services:
     restart: unless-stopped
     depends_on:
       - git
+
+Or use it directly:
+```yaml
+name: parkingpage
+services:
+  parkingpage:
+    image: ghcr.io/ivancarlosti/parkingpage:latest
+    container_name: parkingpage
+    restart: unless-stopped
+    ports:
+      - "10001:80"
+```
+
+## Multi-Site Deployment
+You can serve multiple domains from a single container by mounting a configuration folder containing `.env` files to `/config/sites`. The container will dynamically generate Nginx configurations and separate HTML files for each site.
+
+Each `.env` file should be named after the site (e.g. `example.com.env`) and contain standard configuration variables like `TITLE`, `SUBTEXT`, etc. Nginx will use the `.env` filename as the `server_name` unless you explicitly override it with a `SERVER_NAME` variable inside the `.env` file.
+
+```yaml
+name: parkingpage-multisite
+services:
+  parkingpage:
+    image: ghcr.io/ivancarlosti/parkingpage:latest
+    container_name: parkingpage
+    restart: unless-stopped
+    volumes:
+      - ./sites:/config/sites
+    ports:
+      - "80:80"
 ```
 
 <!-- footer -->

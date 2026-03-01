@@ -7,6 +7,8 @@ services:
     container_name: parkingpage
     restart: unless-stopped
     entrypoint: ["/startup.sh"]
+    volumes:
+      - ./sites:/config/sites # mount a folder with multiple .env files for multi-site support
     ports:
       - "${WEB_PORT:-10001:80}" # default port exposted 10001
     deploy:

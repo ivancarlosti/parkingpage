@@ -6,6 +6,8 @@ services:
     env_file: .env
     container_name: parkingpage
     restart: unless-stopped
+    volumes:
+      - ./sites:/config/sites # mount a folder with multiple .env files for multi-site support
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.php.rule=Host(`subdomain.example.com`)"   ### CHANGE subdomain.example.com TO YOUR DOMAIN ###

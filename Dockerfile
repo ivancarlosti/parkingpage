@@ -17,6 +17,7 @@ RUN printf '%s\n' \
   '    include       mime.types;' \
   '    default_type  application/octet-stream;' \
   '    sendfile        on;' \
+  '    include       /etc/nginx/conf.d/*.conf;' \
   '' \
   '    server {' \
   '        listen       80;' \
