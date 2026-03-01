@@ -20,8 +20,8 @@ RUN printf '%s\n' \
   '    include       /etc/nginx/conf.d/*.conf;' \
   '' \
   '    server {' \
-  '        listen       80;' \
-  '        server_name  localhost;' \
+  '        listen       80 default_server;' \
+  '        server_name  _;' \
   '        root   /usr/share/nginx/html;' \
   '        index  index.html index.htm;' \
   '' \
