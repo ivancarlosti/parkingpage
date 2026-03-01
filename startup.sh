@@ -128,6 +128,9 @@ process_site() {
 
   if [ "$SITE_NAME" != "default" ]; then
     SERVER_NAME="${SERVER_NAME:-$SITE_NAME}"
+    if [ -n "$DOMAINS" ]; then
+      SERVER_NAME=$(echo "$DOMAINS" | tr ',' ' ')
+    fi
     cat > "$NGINX_CONF_DIR/${SITE_NAME}.conf" <<EOF
 server {
     listen 80;
