@@ -129,7 +129,8 @@ process_site() {
   if [ "$SITE_NAME" != "default" ]; then
     SERVER_NAME="${SERVER_NAME:-$SITE_NAME}"
     if [ -n "$DOMAINS" ]; then
-      SERVER_NAME=$(echo "$DOMAINS" | tr ',' ' ')
+      # Convert commas to spaces (for backwards compatibility) and squeeze consecutive spaces
+      SERVER_NAME=$(echo "$DOMAINS" | tr ',' ' ' | tr -s ' ')
     fi
     cat > "$NGINX_CONF_DIR/${SITE_NAME}.conf" <<EOF
 server {
