@@ -161,9 +161,23 @@ if [ -d "$CONFIG_DIR" ] && [ "$(ls -A $CONFIG_DIR/*.env 2>/dev/null)" ]; then
     cp -r /usr/share/nginx/html.template "$target_dir"
 
     (
-      set -a
-      . "$env_file"
-      set +a
+      # Parse .env file safely without executing it to handle unquoted spaces
+      while IFS= read -r line || [ -n "$line" ]; do
+        # Ignore comments and empty lines
+        case "$line" in
+          \#*|"") continue ;;
+        esac
+        # Extract key and value
+        key="${line%%=*}"
+        value="${line#*=}"
+        # Remove surrounding quotes from value if present
+        value="${value%\"}"
+        value="${value#\"}"
+        value="${value%\'}"
+        value="${value#\'}"
+        export "$key"="$value"
+      done < "$env_file"
+      
       process_site "$site_name" "$target_dir"
     )
   done
